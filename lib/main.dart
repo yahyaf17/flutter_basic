@@ -14,16 +14,18 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   int counter = 0;
   String message = "";
+  List<Widget> widgets = [];
 
   void addCounter() {
     setState(() {
-      counter += 1;
+      widgets.add(Text("Data ke-" + counter.toString()));
+      counter++;
     });
   }
 
   void decreaseCounter() {
     setState(() {
-      counter -= 1;
+      widgets.removeLast();
     });
   }
 
@@ -46,22 +48,20 @@ class _MyAppState extends State<MyApp> {
           title: const Text("Learn Statefull Widget"),
         ),
         body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+          child: ListView(
+            // mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(counter.toString()),
               Text(message),
-              ElevatedButton(onPressed: addCounter, child: const Text("Add Counter"),),
-              ElevatedButton(onPressed: decreaseCounter, child: const Text("Decrease Counter")),
-              ElevatedButton(onPressed: () {
-                setState(() {
-                  if (message == "I am pressed") {
-                    message = "";
-                  } else {
-                    message = "I am pressed";
-                  }
-                });
-              }, child: const Text("Press Me"))
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  ElevatedButton(onPressed: addCounter, child: const Text("Add Counter"),),
+                  ElevatedButton(onPressed: decreaseCounter, child: const Text("Decrease Counter")),
+                ],
+              ),
+              Column(
+                children: widgets,)
             ],
           ),
         ),
