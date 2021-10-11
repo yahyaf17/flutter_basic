@@ -13,6 +13,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   int counter = 0;
+  String message = "";
 
   void addCounter() {
     setState(() {
@@ -37,7 +38,6 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -50,8 +50,18 @@ class _MyAppState extends State<MyApp> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(counter.toString()),
+              Text(message),
               ElevatedButton(onPressed: addCounter, child: const Text("Add Counter"),),
-              ElevatedButton(onPressed: decreaseCounter, child: const Text("Decrease Counter"))
+              ElevatedButton(onPressed: decreaseCounter, child: const Text("Decrease Counter")),
+              ElevatedButton(onPressed: () {
+                setState(() {
+                  if (message == "I am pressed") {
+                    message = "";
+                  } else {
+                    message = "I am pressed";
+                  }
+                });
+              }, child: const Text("Press Me"))
             ],
           ),
         ),
